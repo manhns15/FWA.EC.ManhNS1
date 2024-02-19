@@ -8,7 +8,8 @@ function App() {
   }
   return (
     <div>
-      <ChildComponent user={user}/>
+      {/* <ChildComponent user={user}/> */}
+      <ChildComponent {...user}/>
     </div>
   );
 }
