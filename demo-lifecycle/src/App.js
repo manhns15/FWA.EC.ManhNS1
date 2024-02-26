@@ -5,8 +5,8 @@ import FunctionComponent from "./function-component/FunctionComponent";
 function App() {
   return (
     <div>
-      <FunctionComponent />
-      {/* <ClassComponent /> */}
+      {/* <FunctionComponent /> */}
+      <ClassComponent />
     </div>
   );
 }

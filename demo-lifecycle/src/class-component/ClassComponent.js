@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import FunctionComponent from "../function-component/FunctionComponent";
 
 export class ClassComponent extends Component {
   // Phase Mounting
@@ -48,7 +49,12 @@ export class ClassComponent extends Component {
   // Render phải được triển khai
   render() {
     console.log("Render");
-    return <div>{this.state.data}</div>;
+    return (
+      <div>
+        {/* <FunctionComponent /> */}
+        {this.state.data}
+      </div>
+    );
   }
 }
 
