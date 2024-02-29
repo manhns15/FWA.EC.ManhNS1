@@ -11,8 +11,6 @@ export class ClassComponent extends Component {
 
   static getDerivedStateFromProps(nextProps, nextState) {
     console.log("getDerivedStateFromProps");
-    console.log("nextProps", nextProps);
-    console.log("nextProps", nextState);
     return null;
   }
 
