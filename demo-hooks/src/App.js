@@ -7,6 +7,13 @@ import Couter from "./use-state/Couter";
 import FormHandling from "./use-state/FormHandling";
 import Modal from "./use-state/Modal";
 import { NumberList, UseMemo, UseMemo2 } from "./useMemo/UseMemo";
+import UseReducer1 from "./use-reducer/UseReducer";
+import UseReducer2 from "./use-reducer/UseReducer2";
+import UseReducer3 from "./use-reducer/UseReducer3";
+import { ProductContextProvider } from "./context/ProductContext";
+import ProductList from "./products/ProductList";
+import { EventProvider } from "./context/EventContext";
+import Button from "./products/Button";
 
 function App() {
   /** useMemo demo */
@@ -55,10 +62,29 @@ function App() {
       <h2>UseCallBack</h2>
       <UseCallBack />
       <hr /> */}
-      <h2>UseMemo</h2>
-      {/* <UseMemo />
-      <NumberList n={count} handleClick={handleClick} /> */}
-      <UseMemo2 data={data} />
+      {/* <h2>UseMemo</h2>
+      <UseMemo />
+      <NumberList n={count} handleClick={handleClick} />
+      <UseMemo2 data={data} /> */}
+      {/* <h2>UseReducer</h2> */}
+      {/* <UseReducer1 /> */}
+      {/* <UseReducer2 /> */}
+      {/* <UseReducer3 /> */}
+      <h2>UseContext</h2>
+      {/* Sử dụng ProductContextProvider để cung cấp dữ liệu sản phẩm cho toàn bộ ứng dụng */}
+      <ProductContextProvider>
+        <div>
+          <h1>Product Management App</h1>
+          <ProductList />
+        </div>
+      </ProductContextProvider>
+
+      <EventProvider>
+        <div>
+          <h1>Button Context</h1>
+          <Button />
+        </div>
+      </EventProvider>
     </div>
   );
 }
