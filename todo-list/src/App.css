@@ -1,0 +1,27 @@
+span.active {
+  color: #ab1818;
+  font-weight: 600;
+  border-bottom: 1px solid #ab1818;
+  cursor: pointer;
+
+}
+
+span {
+  color: #000;
+  cursor: pointer;
+}
+
+.todo {
+  width: 80%;
+  margin: 50px auto;
+}
+
+.h1 {
+  text-align: center;
+}
+
+.invalid {
+  color: #fd1111;
+  font-size: 13px;
+  margin: 0 0 10px 3px;
+}
