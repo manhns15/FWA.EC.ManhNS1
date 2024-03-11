@@ -39,40 +39,40 @@ function App() {
         <Modal />
         <h2>Form Handling</h2>
         <FormHandling />
-      </div>
+      </div> */}
       <hr />
-      <div>
+      {/* <div>
         <h2>UseEffect 1</h2>
         <UseEffect1 />
         <h2>UseEffect 2</h2>
         <UseEffect2 />
         <h2>UseEffect 3 (scroll)</h2>
         <UseEffect3 />
-      </div>
+      </div> */}
       <hr />
-      <div>
+      {/* <div>
         <h2>UseRef 1</h2>
         <UseRef1 />
         <h2>UseRef 2</h2>
         <UseRef2 />
         <h2>UseRef 3</h2>
         <UseRef3 />
-      </div>
+      </div> */}
       <hr />
-      <h2>UseCallBack</h2>
-      <UseCallBack />
-      <hr /> */}
+      {/* <h2>UseCallBack</h2>
+      <UseCallBack /> */}
+      <hr />
       {/* <h2>UseMemo</h2>
       <UseMemo />
       <NumberList n={count} handleClick={handleClick} />
       <UseMemo2 data={data} /> */}
-      {/* <h2>UseReducer</h2> */}
-      {/* <UseReducer1 /> */}
+      <h2>UseReducer</h2>
+      <UseReducer1 />
       {/* <UseReducer2 /> */}
       {/* <UseReducer3 /> */}
       <h2>UseContext</h2>
       {/* Sử dụng ProductContextProvider để cung cấp dữ liệu sản phẩm cho toàn bộ ứng dụng */}
-      <ProductContextProvider>
+      {/* <ProductContextProvider>
         <div>
           <h1>Product Management App</h1>
           <ProductList />
@@ -84,7 +84,7 @@ function App() {
           <h1>Button Context</h1>
           <Button />
         </div>
-      </EventProvider>
+      </EventProvider> */}
     </div>
   );
 }

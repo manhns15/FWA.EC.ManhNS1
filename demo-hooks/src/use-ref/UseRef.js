@@ -17,13 +17,16 @@ const UseRef2 = () => {
   const [inputValue, setInputValue] = useState("");
   const previousInputValueRef = useRef(""); //useRef không tham gia vào quá trình rendering
 
-  useEffect(() => {
-    // Lưu trữ giá trị trước của inputValue mỗi khi nó thay đổi
-    previousInputValueRef.current = inputValue;
-  }, [inputValue]); // useEffect chỉ chạy khi giá trị của inputValue thay đổi
+  // useEffect(() => {
+  //   // Lưu trữ giá trị trước của inputValue mỗi khi nó thay đổi
+  //   previousInputValueRef.current = inputValue;
+  // }, [inputValue]); // useEffect chỉ chạy khi giá trị của inputValue thay đổi
 
   const handleChange = (event) => {
-    setInputValue(event.target.value);
+    setInputValue((previousInputValue) => {
+      previousInputValueRef.current = previousInputValue;
+      return event.target.value;
+    });
   };
 
   return (

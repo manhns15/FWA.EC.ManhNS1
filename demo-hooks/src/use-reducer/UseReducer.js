@@ -16,6 +16,7 @@ const reducer = (state, action) => {
 const UseReducer1 = () => {
   console.log("UseReducer1 rendered");
   const [state, dispatch] = useReducer(reducer, initialState);
+  console.log("state", state);
 
   return (
     <div>
