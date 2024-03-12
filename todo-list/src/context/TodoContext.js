@@ -5,13 +5,8 @@ export const TodoContext = createContext();
 export const TodoProvider = ({ children }) => {
   const [todos, setTodos] = useState([]);
 
-  const idTodo = todos.reduce(
-    (max, todo) => (todo.id > max ? todo.id : max),
-    0
-  );
-
   const addTodo = (todo) => {
-    setTodos([...todos, { id: idTodo + 1, ...todo }]);
+    setTodos([...todos, { id: todos.length + 1, ...todo }]);
   };
 
   const updateTodo = (id, updatedTodo) => {

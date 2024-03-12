@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { TodoContext } from "../context/TodoContext";
 
-const TodoFormCom = () => {
+const TaskForm = () => {
   const { addTodo } = useContext(TodoContext);
   const [todo, setTodo] = useState({
     name: "",
@@ -77,4 +77,4 @@ const TodoFormCom = () => {
   );
 };
 
-export default TodoFormCom;
+export default TaskForm;

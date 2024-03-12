@@ -1,8 +1,8 @@
 import "./App.css";
 import { TodoProvider } from "./context/TodoContext";
 import "bootstrap/dist/css/bootstrap.min.css";
-import TodoFormCom from "./components/TodoFormCom";
-import TodoListCom from "./components/TodoListCom";
+import TaskList from "./components/TaskList";
+import TaskForm from "./components/TaskForm";
 
 function App() {
   return (
@@ -11,8 +11,8 @@ function App() {
         <div className="todo">
           <h1 className="h1 mb-4">Todo App</h1>
           <div className="content">
-            <TodoFormCom />
-            <TodoListCom />
+            <TaskForm />
+            <TaskList />
           </div>
         </div>
       </TodoProvider>
