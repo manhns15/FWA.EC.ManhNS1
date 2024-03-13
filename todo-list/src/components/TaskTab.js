@@ -8,7 +8,7 @@ const TaskTabs = memo(({ activeTab, onChangeTab }) => {
         <li className="nav-item">
           <span
             className={
-              activeTab === CONSTANT.TODO ? "nav-link active" : "nav-link "
+              activeTab === CONSTANT.TODO ? "nav-link active" : "nav-link"
             }
             aria-current="page"
             onClick={() => onChangeTab(CONSTANT.TODO)}
@@ -18,10 +18,10 @@ const TaskTabs = memo(({ activeTab, onChangeTab }) => {
         </li>
         <li className="nav-item">
           <span
-            onClick={() => onChangeTab(CONSTANT.TODO)}
             className={
-              activeTab === CONSTANT.TODO ? "nav-link  active" : "nav-link"
+              activeTab === CONSTANT.DONE ? "nav-link active" : "nav-link"
             }
+            onClick={() => onChangeTab(CONSTANT.DONE)}
           >
             Done
           </span>
