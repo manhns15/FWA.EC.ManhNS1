@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import TaskItem from "./TaskItem";
 
-const TableItem = memo(({ todos }) => {
+const TableItem = memo(({ tasks }) => {
   console.log("test redering table");
   return (
     <table className="table table-hover">
@@ -15,8 +15,8 @@ const TableItem = memo(({ todos }) => {
         </tr>
       </thead>
       <tbody>
-        {todos.map((todo) => (
-          <TaskItem key={todo.id} todo={todo} />
+        {tasks.map((task) => (
+          <TaskItem key={task.id} task={task} />
         ))}
       </tbody>
     </table>

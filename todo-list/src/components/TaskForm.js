@@ -2,8 +2,8 @@ import React, { useState, useContext } from "react";
 import { TodoContext } from "../context/TodoContext";
 
 const TaskForm = () => {
-  const { addTodo } = useContext(TodoContext);
-  const [todo, setTodo] = useState({
+  const { addTask } = useContext(TodoContext);
+  const [task, setTask] = useState({
     name: "",
     description: "",
   });
@@ -12,9 +12,9 @@ const TaskForm = () => {
   const validateForm = () => {
     let newErrors = {};
 
-    if (todo.name.trim() === "") {
+    if (task.name.trim() === "") {
       newErrors.name = "Name is required";
-    } else if (todo.description.trim() === "") {
+    } else if (task.description.trim() === "") {
       newErrors.description = "Description is required";
     }
 
@@ -24,8 +24,8 @@ const TaskForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setTodo({
-      ...todo,
+    setTask({
+      ...task,
       [name]: value,
     });
   };
@@ -33,12 +33,12 @@ const TaskForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      addTodo({
-        name: todo.name,
-        description: todo.description,
+      addTask({
+        name: task.name,
+        description: task.description,
         checked: false,
       });
-      setTodo({ name: "", description: "" });
+      setTask({ name: "", description: "" });
     }
   };
 
@@ -51,7 +51,7 @@ const TaskForm = () => {
             name="name"
             className="form-control mb-2"
             placeholder="Name"
-            value={todo.name}
+            value={task.name}
             onChange={handleChange}
           />
           {errors.name && <p className="invalid">{errors.name}</p>}
@@ -60,7 +60,7 @@ const TaskForm = () => {
             name="description"
             className="form-control mb-2"
             placeholder="Description"
-            value={todo.description}
+            value={task.description}
             onChange={handleChange}
           />
           {errors.description && (

@@ -5,11 +5,11 @@ import TableItem from "./TableItem";
 import { CONSTANT } from "../constant/Constant";
 
 const TaskList = () => {
-  const { todos } = useContext(TodoContext);
+  const { tasks } = useContext(TodoContext);
   const [activeTab, setActiveTab] = useState(CONSTANT.TODO);
 
   const taskTabs = useMemo(() => {
-    return todos.filter((todo) => {
+    return tasks.filter((todo) => {
       if (activeTab === CONSTANT.TODO) {
         return !todo.checked;
       } else if (activeTab === CONSTANT.DONE) {
@@ -17,12 +17,12 @@ const TaskList = () => {
       }
       return true;
     });
-  }, [todos, activeTab]);
+  }, [tasks, activeTab]);
 
   return (
     <>
       <TaskTabs activeTab={activeTab} onChangeTab={setActiveTab} />
-      <TableItem todos={taskTabs} />
+      <TableItem tasks={taskTabs} />
     </>
   );
 };

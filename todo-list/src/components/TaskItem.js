@@ -1,17 +1,17 @@
 import React, { useContext, useState } from "react";
 import { TodoContext } from "../context/TodoContext";
 
-const TaskItem = ({ todo }) => {
-  console.log("test rendering item", todo);
-  const { updateTodo, deleteTodo } = useContext(TodoContext);
+const TaskItem = ({ task }) => {
+  console.log("test rendering item", task);
+  const { updateTask, deleteTask } = useContext(TodoContext);
   const [editing, setEditing] = useState(false);
   const [updateForm, setUpdateForm] = useState({
-    name: todo.name,
-    description: todo.description,
+    name: task.name,
+    description: task.description,
   });
 
   const handleToggle = () => {
-    updateTodo(todo.id, { ...todo, checked: !todo.checked });
+    updateTask(task.id, { ...task, checked: !task.checked });
   };
 
   const handleChange = (e) => {
@@ -27,8 +27,8 @@ const TaskItem = ({ todo }) => {
   };
 
   const handleSave = () => {
-    updateTodo(todo.id, {
-      ...todo,
+    updateTask(task.id, {
+      ...task,
       name: updateForm.name,
       description: updateForm.description,
     });
@@ -36,12 +36,12 @@ const TaskItem = ({ todo }) => {
   };
 
   const handleDelete = () => {
-    deleteTodo(todo.id);
+    deleteTask(task.id);
   };
 
   return (
-    <tr key={todo.id}>
-      <th scope="row">{todo.id}</th>
+    <tr key={task.id}>
+      <th scope="row">{task.id}</th>
       <td>
         {editing ? (
           <input
@@ -51,7 +51,7 @@ const TaskItem = ({ todo }) => {
             onChange={handleChange}
           />
         ) : (
-          <>{todo.name}</>
+          <>{task.name}</>
         )}
       </td>
       <td>
@@ -63,7 +63,7 @@ const TaskItem = ({ todo }) => {
             onChange={handleChange}
           />
         ) : (
-          <>{todo.description}</>
+          <>{task.description}</>
         )}
       </td>
       <td>
@@ -72,8 +72,8 @@ const TaskItem = ({ todo }) => {
             className="form-check-input"
             type="checkbox"
             role="switch"
-            id={`flexSwitchCheckChecked-${todo.id}`}
-            checked={todo.checked}
+            id={`flexSwitchCheckChecked-${task.id}`}
+            checked={task.checked}
             onChange={handleToggle}
           />
         </div>
