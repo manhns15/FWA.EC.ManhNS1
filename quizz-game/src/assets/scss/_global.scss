@@ -1,0 +1,153 @@
+html {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+input,
+textarea,
+select,
+button {
+  outline: none;
+}
+input {
+  line-height: normal;
+}
+label,
+button {
+  cursor: pointer;
+}
+a {
+  text-decoration: none;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+li {
+  list-style: none;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  background: #fff;
+  backdrop-filter: blur(25px);
+  color: #696f79;
+}
+#main {
+  max-width: 100%;
+  margin: 0 auto;
+}
+.container {
+  padding: 0 30px;
+  margin: 0 auto;
+}
+.active {
+  background: #8692a6;
+  border-radius: 30px;
+  color: #fff;
+}
+.active a {
+  color: #fff !important;
+}
+.h2 {
+  font-size: 33px;
+  font-weight: 600;
+}
+.btn {
+  width: 180px;
+  height: 64px;
+  border: none;
+  background: #8692a6;
+  border-radius: 15px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+}
+.fixed {
+  position: fixed;
+  top: 0;
+}
+.quiz {
+  &-sidebar {
+    width: 300px;
+    position: sticky;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100vh;
+    max-height: 100vh;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    &__heading {
+      text-align: center;
+      margin: 45px 0;
+      font-size: 30px;
+      font-weight: 600;
+    }
+    &__menu {
+      display: flex;
+      flex-direction: column;
+      gap: 5px 0;
+      font-size: 15px;
+    }
+    &__item {
+      padding: 17px 40px;
+      display: flex;
+      align-items: center;
+      gap: 0 30px;
+      cursor: pointer;
+      & a {
+        color: #8692a6;
+      }
+    }
+    &__footer {
+      bottom: 50px;
+      position: absolute;
+      padding: 17px 40px;
+      display: flex;
+      align-items: center;
+      gap: 0 30px;
+      & span {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &-heading {
+    padding: 20px 30px;
+    background-color: #ffffff;
+    backdrop-filter: blur(25px);
+    display: flex;
+    justify-content: flex-end;
+    &__avt {
+      margin-right: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      & img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+    }
+  }
+  &-start {
+    margin: 20px 0;
+    padding: 40px 33px;
+    background: #ffffff;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 25px;
+  }
+  &-content {
+    width: -webkit-fill-available;
+  }
+}

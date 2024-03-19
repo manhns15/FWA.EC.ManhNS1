@@ -1,0 +1,48 @@
+.quiz {
+  &-container {
+    display: flex;
+    position: relative;
+  }
+
+  &-info {
+    display: flex;
+    align-items: center;
+    gap: 0 45px;
+    line-height: 1.8;
+    &__avt {
+      width: 240px;
+      height: 210px;
+    }
+    &__poin {
+      margin-top: 50px;
+      display: flex;
+      gap: 0 45px;
+      &--item {
+        display: flex;
+        gap: 0 17px;
+      }
+      &--icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 70px;
+        height: 70px;
+        font-size: 30px;
+        background: #ffffff;
+        box-shadow: 0px 15px 40px 5px #ededed;
+        border-radius: 15px;
+      }
+      &--card {
+        p {
+          font-size: 29px;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+  &-btn {
+    margin-top: 100px;
+    display: flex;
+    justify-content: end;
+  }
+}
