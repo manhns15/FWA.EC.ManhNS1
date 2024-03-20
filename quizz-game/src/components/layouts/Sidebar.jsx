@@ -9,7 +9,6 @@ const Sidebar = () => {
 
   const { pathname } = useLocation();
   const roles = useSelector((state) => state.auth.role);
-  console.log("role", roles);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -24,7 +23,13 @@ const Sidebar = () => {
         </div>
         <ul className="quiz-sidebar__menu">
           <li
-            className={`quiz-sidebar__item ${pathname === "/" ? "active" : ""}`}
+            className={`quiz-sidebar__item ${
+              pathname === "/" ||
+              pathname === "/quiz-play" ||
+              pathname === "/quiz-result"
+                ? "active"
+                : ""
+            }`}
           >
             <i className="bi bi-house"></i>
             <Link to="/">Home</Link>

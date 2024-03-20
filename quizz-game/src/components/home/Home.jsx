@@ -1,5 +1,12 @@
+import { useNavigate } from "react-router-dom";
+
 const Home = () => {
+  const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("userData"));
+
+  const handleNavigate = () => {
+    navigate(`quiz-play`);
+  };
   return (
     <>
       <div className="quiz-info">
@@ -41,7 +48,9 @@ const Home = () => {
         </div>
       </div>
       <div className="quiz-btn">
-        <button className="btn">Start-quiz</button>
+        <button type="button" className="btn" onClick={handleNavigate}>
+          Start-quiz
+        </button>
       </div>
     </>
   );

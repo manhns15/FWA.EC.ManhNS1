@@ -1,4 +1,49 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchQuestionsAction } from "../../actions/questionAction";
+
 const QuizPlay = () => {
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
+  const { questions, loading, error } = useSelector((state) => state.questions);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState({});
+
+  useEffect(() => {
+    dispatch(fetchQuestionsAction(token));
+  }, [dispatch, token]);
+
+  const handleAnswerChange = (questionId, optionId) => {
+    setSelectedAnswer({
+      ...selectedAnswer,
+      [questionId]: optionId,
+    });
+  };
+
+  const handleNext = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
+
+  const handleBack = () => {
+    setCurrentPage((prevPage) => prevPage - 1);
+  };
+
+  const handleSubmit = () => {
+    // Tạo mảng listQuestionSubmitted từ selectedAnswer
+    const listQuestionSubmitted = Object.keys(selectedAnswer).map(
+      (questionId) => ({
+        id: questionId,
+        answersSubmittedId: [selectedAnswer[questionId]],
+      })
+    );
+
+    // Đoạn này có thể dispatch mảng listQuestionSubmitted hoặc làm bất kỳ điều gì khác với dữ liệu đã submit
+    console.log("Data submitted:", listQuestionSubmitted);
+  };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
   return (
     <>
       <div className="quiz-ques">
@@ -12,63 +57,61 @@ const QuizPlay = () => {
             <span> 29:09</span>
           </div>
         </div>
+
         <div className="quiz-ques__content">
-          <div className="quiz-ques__item">
-            <div className="quiz-ques__item--left"></div>
-            <div className="quiz-ques__item--right">
-              <p>Question 1/5</p>
-              <span>
-                Guy Bailey, Roy Hackett and Paul Stephenson made history in
-                1963, as part of a protest against a bus company that refused to
-                employ black and Asian drivers in which UK city?
-              </span>
-            </div>
-          </div>
-          <div className="quiz-ques__answer">
-            <p>Choose answer</p>
-            <div className="quiz-ques__answer--option">
-              <div className="quiz-ques__answer--item">
-                <input
-                  type="radio"
-                  id="answer_1"
-                  name="answer"
-                  value="answer_1"
-                  checked
-                />
-                <label htmlFor="answer_1">Answer 1</label>
-              </div>
-              <div className="quiz-ques__answer--item">
-                <input
-                  type="radio"
-                  id="answer_2"
-                  name="answer"
-                  value="answer_2"
-                />
-                <label htmlFor="answer_2">Answer 2</label>
-              </div>
-              <div className="quiz-ques__answer--item">
-                <input
-                  type="radio"
-                  id="answer_3"
-                  name="answer"
-                  value="answer_3"
-                />
-                <label htmlFor="answer_3">Answer 3</label>
-              </div>
-              <div className="quiz-ques__answer--item">
-                <input
-                  type="radio"
-                  id="answer_4"
-                  name="answer"
-                  value="answer_4"
-                />
-                <label htmlFor="answer_4">Answer 4</label>
+          <>
+            <div className="quiz-ques__item" key={questions[currentPage]?.id}>
+              <div className="quiz-ques__item--left"></div>
+              <div className="quiz-ques__item--right">
+                <p>
+                  Question {currentPage + 1}/{questions?.length}
+                </p>
+                <span>{questions[currentPage]?.title}</span>
               </div>
             </div>
-          </div>
+            <div className="quiz-ques__answer">
+              <p>Choose answer</p>
+              <div className="quiz-ques__answer--option">
+                {questions[currentPage]?.answers?.map((option) => (
+                  <div className="quiz-ques__answer--item" key={option.id}>
+                    <input
+                      type="radio"
+                      id={option.id}
+                      name={`question_${questions[currentPage]?.id}`}
+                      value={option.id}
+                      checked={
+                        selectedAnswer[questions[currentPage]?.id] === option.id
+                      }
+                      onChange={() =>
+                        handleAnswerChange(
+                          questions[currentPage]?.id,
+                          option.id
+                        )
+                      }
+                    />
+                    <label htmlFor={option.id}>{option.content}</label>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </>
+
           <div className="quiz-ques__btn">
-            <button className="btn">Back</button>
-            <button className="btn">Next</button>
+            {currentPage > 0 && (
+              <button className="btn" onClick={handleBack}>
+                Back
+              </button>
+            )}
+            {currentPage < questions?.length - 1 && (
+              <button className="btn" onClick={handleNext}>
+                Next
+              </button>
+            )}
+            {currentPage === questions?.length - 1 && (
+              <button className="btn" onClick={handleSubmit}>
+                Finish
+              </button>
+            )}
           </div>
         </div>
       </div>
