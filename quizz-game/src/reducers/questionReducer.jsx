@@ -5,6 +5,11 @@ const initialState = {
   loading: false,
   error: null,
 };
+const initialStateSumited = {
+  listQuestionChecked: [],
+  loading: false,
+  error: null,
+};
 
 const questionReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -32,4 +37,30 @@ const questionReducer = (state = initialState, action) => {
   }
 };
 
-export default questionReducer;
+const questionSubmitedReducer = (state = initialStateSumited, action) => {
+  switch (action.type) {
+    case types.SUBMIT_QUESTIONS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case types.SUBMIT_QUESTIONS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        listQuestionChecked: action.payload,
+        error: null,
+      };
+    case types.SUBMIT_QUESTIONS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export { questionReducer, questionSubmitedReducer };
