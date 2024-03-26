@@ -11,13 +11,13 @@ const QuizPlay = () => {
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [questions, setQuestions] = useState({});
   const [seconds, setSeconds] = useState(30 * 60);
+  const [timeUp, setTimeUp] = useState(false);
 
   useEffect(() => {
     const questionData = JSON.parse(sessionStorage.getItem("questions"));
     if (questionData) {
       setQuestions(questionData);
     }
-    // Lấy trạng thái đã lưu từ localStorage
     const storedSelectedAnswers = JSON.parse(
       sessionStorage.getItem("selectedAnswers")
     );
@@ -26,7 +26,6 @@ const QuizPlay = () => {
     }
   }, []);
 
-  // Lưu trạng thái đã chọn vào localStorage khi có sự thay đổi
   useEffect(() => {
     sessionStorage.setItem("selectedAnswers", JSON.stringify(selectedAnswers));
   }, [selectedAnswers]);
@@ -35,14 +34,15 @@ const QuizPlay = () => {
     const intervalId = setInterval(() => {
       if (seconds > 0) {
         setSeconds((prevSeconds) => prevSeconds - 1);
+      } else {
+        clearInterval(intervalId);
+        setTimeUp(true);
       }
-      // có lẽ sẽ xử lý ở đây
     }, 1000);
 
     return () => clearInterval(intervalId);
   }, [seconds]);
 
-  // Hàm chuyển đổi giây thành định dạng mm:ss
   const formatTime = (timeInSeconds) => {
     const minutes = Math.floor(timeInSeconds / 60);
     const seconds = timeInSeconds % 60;
@@ -50,21 +50,6 @@ const QuizPlay = () => {
       .toString()
       .padStart(2, "0")}`;
   };
-
-  useEffect(() => {
-    // Chọn đáp án đầu tiên cho mỗi câu hỏi khi danh sách câu hỏi thay đổi
-    const setDefaultSelectedAnswers = () => {
-      const defaultAnswers = {};
-      questions.forEach((question) => {
-        defaultAnswers[question.id] = [];
-      });
-      setSelectedAnswers(defaultAnswers);
-    };
-
-    if (questions.length > 0) {
-      setDefaultSelectedAnswers();
-    }
-  }, [questions]);
 
   const handleAnswerChange = (questionId, optionId) => {
     setSelectedAnswers((prevSelectedAnswers) => {
@@ -84,7 +69,14 @@ const QuizPlay = () => {
   };
 
   const handleNext = () => {
-    setCurrentPage((prevPage) => prevPage + 1);
+    if (
+      selectedAnswers[questions[currentPage]?.id] !== undefined &&
+      selectedAnswers[questions[currentPage]?.id]?.length !== 0
+    ) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    } else {
+      alert("Please select an answer before proceeding.");
+    }
   };
 
   const handleBack = () => {
@@ -92,20 +84,27 @@ const QuizPlay = () => {
   };
 
   const handleSubmit = () => {
-    // Tạo mảng listQuestionSubmitted từ selectedAnswers
-    const listQuestionSubmitted = Object.keys(selectedAnswers).map(
-      (questionId) => ({
-        id: +questionId,
-        answersSubmittedId: selectedAnswers[questionId],
-      })
-    );
-    dispatch(submitQuestionsAction(token, listQuestionSubmitted));
-    navigate(`/quiz-result`);
+    if (
+      selectedAnswers[questions[currentPage]?.id] !== undefined &&
+      selectedAnswers[questions[currentPage]?.id]?.length !== 0
+    ) {
+      // Tạo mảng listQuestionSubmitted từ selectedAnswers
+      const listQuestionSubmitted = Object.keys(selectedAnswers).map(
+        (questionId) => ({
+          id: +questionId,
+          answersSubmittedId: selectedAnswers[questionId],
+        })
+      );
+      dispatch(submitQuestionsAction(token, listQuestionSubmitted));
+      navigate(`/quiz-result`);
+    } else {
+      alert("Please select an answer before proceeding.");
+    }
   };
 
   // Xác định loại input dựa trên số lượng đáp án
   const determineInputType = (question) => {
-    return question.answers.length === 2 ? "radio" : "checkbox";
+    return question.answers.length <= 4 ? "radio" : "checkbox";
   };
 
   return (
@@ -161,19 +160,24 @@ const QuizPlay = () => {
           </>
 
           <div className="quiz-ques__btn">
-            {currentPage > 0 && (
+            {!timeUp && currentPage > 0 && (
               <button className="btn" onClick={handleBack}>
                 Back
               </button>
             )}
-            {currentPage < questions?.length - 1 && (
+            {!timeUp && currentPage < questions?.length - 1 && (
               <button className="btn" onClick={handleNext}>
                 Next
               </button>
             )}
-            {currentPage === questions?.length - 1 && (
+            {!timeUp && currentPage === questions?.length - 1 && (
               <button className="btn" onClick={handleSubmit}>
                 Finish
+              </button>
+            )}
+            {timeUp && (
+              <button className="btn" onClick={handleSubmit}>
+                Submit
               </button>
             )}
           </div>

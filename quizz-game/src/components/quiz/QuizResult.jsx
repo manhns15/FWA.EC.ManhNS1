@@ -1,4 +1,14 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 const QuizResult = () => {
+  const dataSubmit = JSON.parse(sessionStorage.getItem("listQuestionChecked"));
+  const navigate = useNavigate();
+  const userData = JSON.parse(localStorage.getItem("userData"));
+  const [currentDate] = useState(new Date());
+  const formattedDate = `${currentDate.getDate()}/${
+    currentDate.getMonth() + 1
+  }/${currentDate.getFullYear()}`;
   return (
     <>
       <div className="quiz-result">
@@ -12,23 +22,24 @@ const QuizResult = () => {
             <ul>
               <li>
                 <span>Name: </span>
-                <span>Nguyen Sy Manh</span>
+                <span>{userData.name}</span>
               </li>
               <li>
                 <span>Date: </span>
-                <span>14/03/2024</span>
+                <span>{formattedDate}</span>
               </li>
               <li>
                 <span>Time Limit: </span>
                 <span>30 Mins</span>
               </li>
               <li>
-                <span>Quizz pass: </span>
-                <span>20/30</span>
-              </li>
-              <li>
                 <span>Points: </span>
-                <span>100 Points</span>
+                <span>
+                  {dataSubmit?.totalScore >= 0
+                    ? Math.round(dataSubmit?.totalScore * 100) / 100
+                    : 0}{" "}
+                  Points
+                </span>
               </li>
             </ul>
           </div>
@@ -49,7 +60,13 @@ const QuizResult = () => {
           </span>
         </div>
         <div className="quiz-result__btn">
-          <button className="btn">Done</button>
+          <button className="btn" onClick={() => navigate(`/quiz-review`)}>
+            Review
+          </button>{" "}
+          &nbsp;
+          <button className="btn" onClick={() => navigate(`/`)}>
+            Done
+          </button>
         </div>
       </div>
     </>

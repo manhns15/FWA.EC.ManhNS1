@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchQuestionsAction } from "../../actions/questionAction";
 import { useDispatch, useSelector } from "react-redux";
+import { uploadAvatarAction } from "../../actions/profileAction";
 
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [selects] = useState([10, 20, 30]);
+  const [selects] = useState([3, 10, 20, 30]);
   const [selectedOption, setSelectedOption] = useState(0);
+  const [avatar, setAvatar] = useState(null);
 
   const token = useSelector((state) => state.auth.token);
   const { questions } = useSelector((state) => state.questions);
@@ -20,6 +22,13 @@ const Home = () => {
     setSelectedOption(event.target.value);
   };
 
+  const handleAvatarChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setAvatar(URL.createObjectURL(file));
+      dispatch(uploadAvatarAction(token, file));
+    }
+  };
   useEffect(() => {
     dispatch(fetchQuestionsAction(token, selectedOption));
   }, [dispatch, token, selectedOption]);
@@ -31,7 +40,21 @@ const Home = () => {
     <>
       <div className="quiz-info">
         <div className="quiz-info__avt">
-          <img src={userData.avatar_link} alt="" />
+          {avatar ? (
+            <img src={avatar} alt="Avatar" />
+          ) : (
+            <img src={userData.avatar_link} alt="Current Avatar" />
+          )}
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleAvatarChange}
+            style={{ display: "none" }}
+            id="avatar-input"
+          />
+          <label htmlFor="avatar-input" className="change-avatar-btn">
+            Upload
+          </label>
         </div>
         <div className="quiz-info__item">
           <p className="h2">{userData.name}</p>

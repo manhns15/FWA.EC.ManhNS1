@@ -32,7 +32,11 @@ const submitQuestionsAction = (token, listQuestionSubmitted) => {
         type: types.SUBMIT_QUESTIONS_SUCCESS,
         payload: data.data,
       });
-      console.log("data", data);
+      const listQuestionChecked = data.data;
+      sessionStorage.setItem(
+        "listQuestionChecked",
+        JSON.stringify(listQuestionChecked)
+      );
     } catch (error) {
       dispatch({
         type: types.SUBMIT_QUESTIONS_FAILURE,

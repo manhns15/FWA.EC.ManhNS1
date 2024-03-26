@@ -26,7 +26,8 @@ const Sidebar = () => {
             className={`quiz-sidebar__item ${
               pathname === "/" ||
               pathname === "/quiz-play" ||
-              pathname === "/quiz-result"
+              pathname === "/quiz-result" ||
+              pathname === "/quiz-review"
                 ? "active"
                 : ""
             }`}

@@ -10,8 +10,12 @@
     gap: 0 45px;
     line-height: 1.6;
     &__avt {
+      position: relative;
       width: 240px;
       height: 210px;
+      & img {
+        height: 100%;
+      }
     }
     &__poin {
       margin-top: 20px;

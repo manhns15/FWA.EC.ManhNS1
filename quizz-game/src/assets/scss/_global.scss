@@ -245,3 +245,26 @@ button[disabled] {
 .box select option {
   padding: 30px;
 }
+.cl-pass {
+  color: #0e9d4e;
+}
+.cl-fail {
+  color: #ff0000;
+}
+.change-avatar-btn {
+  position: absolute;
+  width: inherit;
+  bottom: 0;
+  text-align: center;
+  color: #ffff;
+  background-color: #6666669a;
+  border-top-left-radius: 80%;
+  border-top-right-radius: 80%;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.4s linear;
+}
+.quiz-info__avt:hover .change-avatar-btn {
+  visibility: visible;
+  opacity: 1;
+}

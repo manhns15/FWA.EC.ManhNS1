@@ -11,6 +11,7 @@ import QuizResult from "./components/quiz/QuizResult";
 import ListUser from "./components/management/ListUser";
 import QuizList from "./components/management/QuizList";
 import { useSelector } from "react-redux";
+import QuizReview from "./components/quiz/QuizReview";
 // import PageNF from "./components/page404/PageNF";
 // import { ADMIN } from "./constants/contants";
 
@@ -32,8 +33,10 @@ function App() {
                 <Route index element={<Home />} />
                 <Route path="/quiz-play" element={<QuizPlay />} />
                 <Route path="/quiz-result" element={<QuizResult />} />
+                <Route path="/quiz-review" element={<QuizReview />} />
                 {/* {roles.includes(ADMIN) && (
                   <> */}
+
                 <Route path="/quiz-list" element={<QuizList />} />
                 <Route path="/users" element={<ListUser />} />
                 {/* </>
