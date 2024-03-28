@@ -45,9 +45,9 @@ const submitQuestions = async (token, listQuestionSubmitted) => {
   }
 };
 
-const fetchQuestions = async (token) => {
+const fetchQuestions = async (token, page) => {
   try {
-    const response = await fetch(`${API_URL}/questions`, {
+    const response = await fetch(`${API_URL}/questions?page=${page}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

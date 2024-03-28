@@ -1,8 +1,8 @@
 import { API_URL } from "../constants/contants";
 
-const fetchUsers = async (token) => {
+const fetchUsers = async (token, page) => {
   try {
-    const response = await fetch(`${API_URL}/user`, {
+    const response = await fetch(`${API_URL}/user?page=${page}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

@@ -71,6 +71,7 @@ const questionSubmitedReducer = (state = initialStateSumited, action) => {
 };
 
 const questionsReducer = (state = initialStateQuestion, action) => {
+  console.log(action);
   switch (action.type) {
     case types.FETCH_QUESTIONS_REQUEST:
       return {

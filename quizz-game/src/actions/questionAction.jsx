@@ -1,5 +1,6 @@
 import * as types from "../constants/contants";
 import {
+  fetchQuestions,
   fetchQuestionsPlay,
   submitQuestions,
 } from "../services/questionService";
@@ -49,4 +50,25 @@ const submitQuestionsAction = (token, listQuestionSubmitted) => {
   };
 };
 
-export { fetchQuestionsPlayAction, submitQuestionsAction };
+const questionsAction = (token, page) => {
+  return async (dispatch) => {
+    dispatch({
+      type: types.FETCH_QUESTIONS_REQUEST,
+    });
+    try {
+      const data = await fetchQuestions(token, page);
+      dispatch({
+        type: types.FETCH_QUESTIONS_SUCCESS,
+        payload: data.data,
+      });
+      console.log("data", data);
+    } catch (error) {
+      dispatch({
+        type: types.FETCH_QUESTIONS_FAILURE,
+        payload: error.message,
+      });
+    }
+  };
+};
+
+export { fetchQuestionsPlayAction, submitQuestionsAction, questionsAction };
