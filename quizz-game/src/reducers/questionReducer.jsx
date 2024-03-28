@@ -1,7 +1,7 @@
 import * as types from "../constants/contants";
 
-const initialState = {
-  questions: [],
+const initialStatePlay = {
+  questionPlay: [],
   loading: false,
   error: null,
 };
@@ -10,23 +10,30 @@ const initialStateSumited = {
   loading: false,
   error: null,
 };
+const initialStateQuestion = {
+  questions: [],
+  loading: false,
+  error: null,
+};
 
-const questionReducer = (state = initialState, action) => {
+// const initialStateQuestion
+
+const questionPlayReducer = (state = initialStatePlay, action) => {
   switch (action.type) {
-    case types.FETCH_QUESTIONS_REQUEST:
+    case types.FETCH_QUESTIONS_PLAY_REQUEST:
       return {
         ...state,
         loading: true,
         error: null,
       };
-    case types.FETCH_QUESTIONS_SUCCESS:
+    case types.FETCH_QUESTIONS_PLAY_SUCCESS:
       return {
         ...state,
         loading: false,
-        questions: action.payload,
+        questionPlay: action.payload,
         error: null,
       };
-    case types.FETCH_QUESTIONS_FAILURE:
+    case types.FETCH_QUESTIONS_PLAY_FAILURE:
       return {
         ...state,
         loading: false,
@@ -63,4 +70,29 @@ const questionSubmitedReducer = (state = initialStateSumited, action) => {
   }
 };
 
-export { questionReducer, questionSubmitedReducer };
+const questionsReducer = (state = initialStateQuestion, action) => {
+  switch (action.type) {
+    case types.FETCH_QUESTIONS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case types.FETCH_QUESTIONS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        questions: action.payload,
+        error: null,
+      };
+    case types.FETCH_QUESTIONS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+export { questionPlayReducer, questionSubmitedReducer, questionsReducer };

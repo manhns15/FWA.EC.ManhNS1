@@ -1,12 +1,17 @@
 import { combineReducers } from "redux";
 import authReducer from "./authReducer";
-import { questionReducer, questionSubmitedReducer } from "./questionReducer";
+import {
+  questionPlayReducer,
+  questionSubmitedReducer,
+  questionsReducer,
+} from "./questionReducer";
 import { profileAvtReducer, profileReducer } from "./profileReducer";
 
 const rootReducer = combineReducers({
   // Them cac reducer vao day va config
   auth: authReducer,
-  questions: questionReducer,
+  questions: questionsReducer,
+  questionsPlay: questionPlayReducer,
   questionSubmited: questionSubmitedReducer,
   profile: profileReducer,
   profileAvt: profileAvtReducer,

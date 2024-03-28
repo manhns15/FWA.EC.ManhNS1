@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchQuestionsAction } from "../../actions/questionAction";
+import { fetchQuestionsPlayAction } from "../../actions/questionAction";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadAvatarAction } from "../../actions/profileAction";
 
@@ -12,11 +12,11 @@ const Home = () => {
   const [avatar, setAvatar] = useState(null);
 
   const token = useSelector((state) => state.auth.token);
-  const { questions } = useSelector((state) => state.questions);
+  const { questionPlay } = useSelector((state) => state.questionsPlay);
   const userData = JSON.parse(localStorage.getItem("userData"));
 
-  const questionsData = JSON.stringify(questions);
-  sessionStorage.setItem("questions", questionsData);
+  const questionsData = JSON.stringify(questionPlay);
+  sessionStorage.setItem("questionPlay", questionsData);
 
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
@@ -30,7 +30,7 @@ const Home = () => {
     }
   };
   useEffect(() => {
-    dispatch(fetchQuestionsAction(token, selectedOption));
+    dispatch(fetchQuestionsPlayAction(token, selectedOption));
   }, [dispatch, token, selectedOption]);
 
   const handleNavigate = () => {

@@ -9,14 +9,14 @@ const QuizPlay = () => {
   const token = useSelector((state) => state.auth.token);
   const [currentPage, setCurrentPage] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
-  const [questions, setQuestions] = useState({});
+  const [questionsPlay, setQuestionsPlay] = useState({});
   const [seconds, setSeconds] = useState(30 * 60);
   const [timeUp, setTimeUp] = useState(false);
 
   useEffect(() => {
-    const questionData = JSON.parse(sessionStorage.getItem("questions"));
+    const questionData = JSON.parse(sessionStorage.getItem("questionPlay"));
     if (questionData) {
-      setQuestions(questionData);
+      setQuestionsPlay(questionData);
     }
     const storedSelectedAnswers = JSON.parse(
       sessionStorage.getItem("selectedAnswers")
@@ -70,8 +70,8 @@ const QuizPlay = () => {
 
   const handleNext = () => {
     if (
-      selectedAnswers[questions[currentPage]?.id] !== undefined &&
-      selectedAnswers[questions[currentPage]?.id]?.length !== 0
+      selectedAnswers[questionsPlay[currentPage]?.id] !== undefined &&
+      selectedAnswers[questionsPlay[currentPage]?.id]?.length !== 0
     ) {
       setCurrentPage((prevPage) => prevPage + 1);
     } else {
@@ -85,8 +85,8 @@ const QuizPlay = () => {
 
   const handleSubmit = () => {
     if (
-      selectedAnswers[questions[currentPage]?.id] !== undefined &&
-      selectedAnswers[questions[currentPage]?.id]?.length !== 0
+      selectedAnswers[questionsPlay[currentPage]?.id] !== undefined &&
+      selectedAnswers[questionsPlay[currentPage]?.id]?.length !== 0
     ) {
       // Tạo mảng listQuestionSubmitted từ selectedAnswers
       const listQuestionSubmitted = Object.keys(selectedAnswers).map(
@@ -123,31 +123,34 @@ const QuizPlay = () => {
 
         <div className="quiz-ques__content">
           <>
-            <div className="quiz-ques__item" key={questions[currentPage]?.id}>
+            <div
+              className="quiz-ques__item"
+              key={questionsPlay[currentPage]?.id}
+            >
               <div className="quiz-ques__item--left"></div>
               <div className="quiz-ques__item--right">
                 <p>
-                  Question {currentPage + 1}/{questions?.length}
+                  Question {currentPage + 1}/{questionsPlay?.length}
                 </p>
-                <span>{questions[currentPage]?.title}</span>
+                <span>{questionsPlay[currentPage]?.title}</span>
               </div>
             </div>
             <div className="quiz-ques__answer">
               <p>Choose answer</p>
               <div className="quiz-ques__answer--option">
-                {questions[currentPage]?.answers?.map((option) => (
+                {questionsPlay[currentPage]?.answers?.map((option) => (
                   <div className="quiz-ques__answer--item" key={option.id}>
                     <input
-                      type={determineInputType(questions[currentPage])}
+                      type={determineInputType(questionsPlay[currentPage])}
                       id={option.id}
-                      name={`question_${questions[currentPage]?.id}`}
+                      name={`question_${questionsPlay[currentPage]?.id}`}
                       value={option.id}
                       checked={selectedAnswers[
-                        questions[currentPage]?.id
+                        questionsPlay[currentPage]?.id
                       ]?.includes(option.id)}
                       onChange={() =>
                         handleAnswerChange(
-                          questions[currentPage]?.id,
+                          questionsPlay[currentPage]?.id,
                           option.id
                         )
                       }
@@ -165,12 +168,12 @@ const QuizPlay = () => {
                 Back
               </button>
             )}
-            {!timeUp && currentPage < questions?.length - 1 && (
+            {!timeUp && currentPage < questionsPlay?.length - 1 && (
               <button className="btn" onClick={handleNext}>
                 Next
               </button>
             )}
-            {!timeUp && currentPage === questions?.length - 1 && (
+            {!timeUp && currentPage === questionsPlay?.length - 1 && (
               <button className="btn" onClick={handleSubmit}>
                 Finish
               </button>
