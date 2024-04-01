@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quizz game</title>
+    <link rel="stylesheet" href="./assets/css/app.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+  </head>
+  <body>
+    <main id="main">
+      <div class="quiz">
+        <div class="quiz-container">
+          <div class="quiz-sidebar">
+            <div class="container">
+              <div class="quiz-sidebar__heading">
+                <p>Quiz Game</p>
+              </div>
+              <ul class="quiz-sidebar__menu">
+                <li class="quiz-sidebar__item active">
+                  <i class="bi bi-house"></i><span>Home</span>
+                </li>
+                <li class="quiz-sidebar__item">
+                  <i class="bi bi-headset"></i><span>Support</span>
+                </li>
+                <li class="quiz-sidebar__item">
+                  <i class="bi bi-bell"></i><span>Notification</span>
+                </li>
+              </ul>
+              <div class="quiz-sidebar__footer">
+                <i class="bi bi-box-arrow-left"></i><span>Logout</span>
+              </div>
+            </div>
+          </div>
+          <div class="quiz-content">
+            <div class="quiz-heading">
+              <div class="quiz-heading__avt">
+                <img src="./assets/images/avt.png" alt="" />
+              </div>
+            </div>
+            <div class="container">
+              <div class="quiz-start">
+                <div class="quiz-result">
+                  <div class="quiz-result__heading">
+                    <p class="h2">Nguyen Sy Manh</p>
+                    <span>Read the following instructions</span>
+                  </div>
+                  <div class="quiz-result__content">
+                    <div class="quiz-result__content--left"></div>
+                    <div class="quiz-result__content--right">
+                      <ul>
+                        <li><span>Name: </span><span>Nguyen Sy Manh</span></li>
+                        <li><span>Date: </span><span>14/03/2024</span></li>
+                        <li><span>Time Limit: </span><span>30 Mins</span></li>
+                        <li><span>Quizz pass: </span><span>20/30</span></li>
+                        <li><span>Points: </span><span>100 Points</span></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="quiz-result__desc">
+                    <p>Instructions</p>
+                    <span
+                      >This quiz consists of 5 multiple-choice questions. To be
+                      successful with the quizzes, it’s important to conversant
+                      with the topics. Keep the following in mind: <br />Timing
+                      - You need to complete each of your attempts in one
+                      sitting, as you are allotted 30 minutes to each attempt.
+                      <br />Answers - You may review your answer-choices and
+                      compare them to the correct answers after your final
+                      attempt. <br />To start, click the "Start" button. When
+                      finished, click the "Submit " button.</span
+                    >
+                  </div>
+                  <div class="quiz-result__btn">
+                    <button class="btn">Done</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
